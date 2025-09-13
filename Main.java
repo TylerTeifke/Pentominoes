@@ -6,20 +6,20 @@ public class Main{
         board.print_out();
 
         System.out.println("");
-        System.out.println("T piece");
-        T t = new T();
-        t.print_out();
-        t.rotate(90);
+        System.out.println("Flipped L piece");
+        Flipped_L l = new Flipped_L();
+        l.print_out();
+        l.rotate(90);
         System.out.println("90 degrees");
-        t.print_out();
-        t.rotate(180);
+        l.print_out();
+        l.rotate(180);
         System.out.println("180 degrees");
-        t.print_out();
-        t.rotate(270);
+        l.print_out();
+        l.rotate(270);
         System.out.println("270 degrees");
-        t.print_out();
-        t.rotate(0);
+        l.print_out();
+        l.rotate(0);
         System.out.println("0 degrees");
-        t.print_out();
+        l.print_out();
     }
 }
