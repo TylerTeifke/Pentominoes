@@ -54,22 +54,30 @@ public class Pentomino {
         return right;
     }
 
+    public boolean get_placed(){
+        return placed;
+    }
+
+    public void set_placed(boolean placement){
+        placed = placement;
+    }
+
     /*
      * Will return the relevant parts of a pentomino
      */
     public char[][] get_piece(){
-        char[][] ret_piece = new char[5 - (top + bottom)][5 - (left + right)];
+        char[][] ret_piece = new char[1 + top + bottom][1 + left + right];
         //Will be used to keep track of the placment of the original piece
-        int old_i = top;
-        int old_j = left;
+        int old_i = 2 - top;
+        int old_j = 2 - left;
 
-        for(int i = 0; i < 5 - (top + bottom); i++){
-            for(int j = 0; j < 5 - (top + bottom); j++){
+        for(int i = 0; i < 1 + top + bottom; i++){
+            for(int j = 0; j < 1 + left + right; j++){
                 ret_piece[i][j] = piece[old_i][old_j];
                 old_j++;
             }
             old_i++;
-            old_j = left;
+            old_j = 2 - left;
         }
 
         return ret_piece;
