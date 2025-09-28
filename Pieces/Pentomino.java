@@ -6,6 +6,7 @@ package Pieces;
 public class Pentomino {
     protected char[][] piece = new char[5][5];
     protected boolean placed;
+    protected boolean flipped;
 
     //These will be used to determine where the relevant portions of a piece are
     protected int top;
@@ -21,6 +22,7 @@ public class Pentomino {
         }
 
         placed = false;
+        flipped = false;
     }
 
     public void print_out(){
@@ -81,5 +83,12 @@ public class Pentomino {
         }
 
         return ret_piece;
+    }
+
+    /*
+     * Let's the user flip a piece that can be flipped
+     */
+    public void flip(){
+        System.out.println("Cannot flip");
     }
 }

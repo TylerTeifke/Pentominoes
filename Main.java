@@ -15,6 +15,13 @@ public class Main{
         i.rotate(90);
         V v = new V();
         v.rotate(180);
+        Z z = new Z();
+        z.flip();
+        F f = new F();
+        f.flip();
+        f.rotate(180);
+        Y y = new Y();
+        y.print_out();
         
 
         board.place(x, 1, 2);
@@ -22,8 +29,10 @@ public class Main{
         board.place(u, 1, 0);
         board.place(i, 3, 5);
         board.place(v, 4, 1);
+        board.place(z, 4, 2);
+        board.place(f, 3, 3);
+        board.place(y, 9, 3);
         System.out.println("After");
         board.print_out();
-        //System.out.println(t.get_placed());
     }
 }
