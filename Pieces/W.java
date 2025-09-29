@@ -5,6 +5,11 @@ public class W extends Pentomino {
         piece[1][1] = 'W';
         piece[2][1] = piece[2][2] = 'W';
         piece[3][2] = piece[3][3] = 'W';
+
+        top = 1;
+        bottom = 1;
+        left = 1;
+        right = 1;
     }
 
     public void rotate(int degrees){
