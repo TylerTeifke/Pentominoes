@@ -26,8 +26,10 @@ public class Main{
         n.rotate(270);
         P p = new P();
         p.rotate(90);
+        L l = new L();
+        l.flip();
+        l.rotate(270);
         
-
         board.place(x, 1, 2);
         board.place(t, 1, 4);
         board.place(u, 1, 0);
@@ -39,6 +41,7 @@ public class Main{
         board.place(w, 7, 3);
         board.place(n, 7, 4);
         board.place(p, 7, 1);
+        board.place(l, 8, 0);
         System.out.println("After");
         board.print_out();
     }
