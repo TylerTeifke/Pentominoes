@@ -1,4 +1,5 @@
 import Pieces.Pentomino;
+import java.util.ArrayList;
 
 /**
  * The board class will be where we place our pieces. It is a 6x10 2D array
@@ -81,6 +82,96 @@ public class Board {
             piece_Y = 0;
         }
         piece.set_placed(true);
+        return true;
+    }
+
+    //Private helper functions will tell if the spaces surrounding a space are already occupied
+    private int top_taken(int x_cord, int y_cord){
+        if(y_cord == 0 || board[y_cord - 1][x_cord] != '0'){
+            return 1;
+        }
+        return 0;
+    }
+    private int bottom_taken(int x_cord, int y_cord){
+        if(y_cord == 5 || board[y_cord + 1][x_cord] != '0'){
+            return 1;
+        }
+        return 0;
+    }
+    private int left_taken(int x_cord, int y_cord){
+        if(x_cord == 0 || board[y_cord][x_cord - 1] != '0'){
+            return 1;
+        }
+        return 0;
+    }
+    private int right_taken(int x_cord, int y_cord){
+        if(x_cord == 9 || board[y_cord][x_cord + 1] != '0'){
+            return 1;
+        }
+        return 0;
+    }
+
+    //Will tell how spaces a space is surrounded by
+    private int surrounded(int x_cord, int y_cord){
+        int sorrunded_by = top_taken(x_cord, y_cord) +
+                           bottom_taken(x_cord, y_cord) +
+                           left_taken(x_cord, y_cord) +
+                           right_taken(x_cord, y_cord);
+
+        return sorrunded_by;
+    }
+
+    //Will clear all of the ones off the board
+    private void clear_board(ArrayList<int[]> surrounded_squares){
+        while(surrounded_squares.size() > 0){
+            int x = surrounded_squares.get(0)[0];
+            int y = surrounded_squares.get(0)[1];
+            board[y][x] = '0';
+            surrounded_squares.remove(0);
+        }
+    }
+
+    /*
+     * Will decide if a piece placement is a valid solution
+     */
+    public boolean validate(){
+        //Will keep track of how many isolated squares there are
+        int isolated = 0;
+
+        //Will be used to determine which squares are surrounded by other squares so that 
+        //they can be turned back to zeros
+        ArrayList<int[]> surrounded_squares = new ArrayList<int[]>();
+
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 10; j++){
+                //Only check empty blocks
+                if(board[i][j] == '0'){
+                    int surrounded_by = surrounded(j, i);
+
+                    //If there is one block that is completely surrounded,
+                    //then the game cannot be completed
+                    if(surrounded_by == 4){
+                        clear_board(surrounded_squares);
+                        return false;
+                    }
+                    if(surrounded_by == 3){
+                        //Will mark spaces that are surrounded
+                        board[i][j] = '1';
+                        int[] cords = {j, i};
+                        surrounded_squares.add(cords);
+                        isolated++;
+                    }
+                }
+            }
+        }
+
+        System.out.println(isolated);
+        clear_board(surrounded_squares);
+        //If there are not enough isolated blocks to fit a piece into,
+        //then the game cannot be completed
+        if(isolated >= 5){
+            return false;
+        }
         return true;
     }
 }
