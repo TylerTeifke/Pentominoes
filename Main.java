@@ -14,7 +14,7 @@ public class Main{
         I i = new I();
         i.rotate(90);
         V v = new V();
-        v.rotate(180);
+        v.rotate(270);
         Z z = new Z();
         z.flip();
         F f = new F();
@@ -31,19 +31,19 @@ public class Main{
         l.rotate(90);
         
         board.place(x, 1, 2);
-        board.place(t, 4, 3);
-        board.place(u, 1, 4);
-        board.place(i, 2, 5);
-        //board.place(v, 4, 1);
+        //board.place(t, 4, 3);
+        //board.place(u, 1, 4);
+        //board.place(i, 2, 5);
+        //board.place(v, 2, 1);
         //board.place(z, 4, 2);
         //board.place(f, 3, 3);
         //board.place(y, 9, 3);
         //board.place(w, 7, 3);
         //board.place(n, 7, 4);
-        //board.place(p, 7, 1);
+        //board.place(p, 1, 0);
         //board.place(l, 8, 1);
         System.out.println("After");
+        System.out.println(board.validate(1, 2, -1, 1));
         board.print_out();
-        System.out.println(board.validate());
     }
 }

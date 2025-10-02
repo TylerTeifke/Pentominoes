@@ -132,44 +132,60 @@ public class Board {
     }
 
     /*
+     * Will recursively track all of the isolated squares on the board
+     */
+    private int track_isolated(int x_cord, int y_cord, int depth, ArrayList<int[]> surrounded_squares){
+        //System.out.println("test");
+        if(x_cord < 0 || y_cord < 0 || x_cord > 9 || y_cord > 5 || board[y_cord][x_cord] != '0' || depth <= 0){
+            return 0;
+        }
+        else{
+            int surrounded_by = surrounded(x_cord, y_cord);
+            if(surrounded_by >= 2){
+                //Will mark spaces that are surrounded
+                board[y_cord][x_cord] = '1';
+                int[] cords = {x_cord, y_cord};
+                surrounded_squares.add(cords);
+                return 1 + 
+                       track_isolated(x_cord + 1, y_cord, depth--, surrounded_squares) +
+                       track_isolated(x_cord - 1, y_cord, depth--, surrounded_squares) +
+                       track_isolated(x_cord, y_cord + 1, depth--, surrounded_squares) +
+                       track_isolated(x_cord, y_cord - 1, depth--, surrounded_squares);
+            }
+            else{
+                return 0 + 
+                    track_isolated(x_cord + 1, y_cord, depth--, surrounded_squares) +
+                    track_isolated(x_cord - 1, y_cord, depth--, surrounded_squares) +
+                    track_isolated(x_cord, y_cord + 1, depth--, surrounded_squares) +
+                    track_isolated(x_cord, y_cord - 1, depth--, surrounded_squares);
+            }
+        }
+    }
+    /*
      * Will decide if a piece placement is a valid solution
      */
-    public boolean validate(){
-        //Will keep track of how many isolated squares there are
-        int isolated = 0;
-
+    public boolean validate(int x_cord, int y_cord, int x_mod, int y_mod){
         //Will be used to determine which squares are surrounded by other squares so that 
         //they can be turned back to zeros
         ArrayList<int[]> surrounded_squares = new ArrayList<int[]>();
 
-        for(int i = 0; i < 6; i++){
-            for(int j = 0; j < 10; j++){
-                //Only check empty blocks
-                if(board[i][j] == '0'){
-                    int surrounded_by = surrounded(j, i);
+        //Will keep track of how many isolated squares there are
+        int isolated = track_isolated(x_cord + x_mod, y_cord + y_mod, 5, surrounded_squares);
 
-                    //If there is one block that is completely surrounded,
-                    //then the game cannot be completed
-                    if(surrounded_by == 4){
-                        clear_board(surrounded_squares);
-                        return false;
-                    }
-                    if(surrounded_by == 3){
-                        //Will mark spaces that are surrounded
-                        board[i][j] = '1';
-                        int[] cords = {j, i};
-                        surrounded_squares.add(cords);
-                        isolated++;
-                    }
-                }
-            }
-        }
-
-        System.out.println(isolated);
         clear_board(surrounded_squares);
         //If there are not enough isolated blocks to fit a piece into,
         //then the game cannot be completed
-        if(isolated >= 5){
+        if(isolated < 5 && isolated > 0){
+            return false;
+        }
+        return true;
+    }
+
+    /*
+     * Will determine if the placement of a piece is just a reflection of another placement
+     */
+    public boolean is_reflection(int x_cord, int y_cord){
+        if(x_cord <= 4 && y_cord <= 2){
             return false;
         }
         return true;
