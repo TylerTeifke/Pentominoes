@@ -85,6 +85,37 @@ public class Board {
         return true;
     }
 
+    /*
+     * Will remove a piece from the board
+     */
+    public void remove(Pentomino piece, int x_cord, int y_cord){
+
+        //The center of the piece will be x_cord, y_cord. These variables will
+        //be used to deviat from the center
+        int top = piece.get_top();
+        int bottom = piece.get_bottom();
+        int left = piece.get_left();
+        int right = piece.get_right();
+
+        char[][] pentomino = piece.get_piece();
+
+        //Will be used to track the x and y coordinates of the piece
+        int piece_X = 0;
+        int piece_Y = 0;
+
+        for(int i = y_cord - top; i <= y_cord + bottom; i++){
+            for(int j = x_cord - left; j <= x_cord + right; j++){
+                if(pentomino[piece_X][piece_Y] != '0'){
+                    board[i][j] = '0';
+                }
+                piece_Y++;
+            }
+            piece_X++;
+            piece_Y = 0;
+        }
+        piece.set_placed(false);
+    }
+
     //Private helper functions will tell if the spaces surrounding a space are already occupied
     private int top_taken(int x_cord, int y_cord){
         if(y_cord == 0 || board[y_cord - 1][x_cord] != '0'){
@@ -182,12 +213,29 @@ public class Board {
     }
 
     /*
-     * Will determine if the placement of a piece is just a reflection of another placement
+     * Will reflect a piece across the horizontal axis
      */
-    public boolean is_reflection(int x_cord, int y_cord){
-        if(x_cord <= 4 && y_cord <= 2){
-            return false;
-        }
-        return true;
+    public int reflect_horizontal(Pentomino piece, int x_cord, int y_cord){
+        remove(piece, x_cord, y_cord);
+        x_cord = 9 - x_cord;
+        place(piece, x_cord, y_cord);
+        return x_cord;
+    }
+
+    /*
+     * Will reflect a piece across the vertical axis
+     */
+    public void reflect_vertical(Pentomino piece, int x_cord, int y_cord){
+        remove(piece, x_cord, y_cord);
+        y_cord = 5 - y_cord;
+        place(piece, x_cord, y_cord);
+    }
+
+    /*
+     * Will reflect the piece across both axes
+     */
+    public void reflect_both(Pentomino piece, int x_cord, int y_cord){
+        int new_x_cord = reflect_horizontal(piece, x_cord, y_cord);
+        reflect_vertical(piece, new_x_cord, y_cord);
     }
 }

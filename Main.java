@@ -7,14 +7,14 @@ public class Main{
         board.print_out();
 
         T t = new T();
-        //t.rotate(270);
+        t.rotate(270);
         X x = new X();
         U u = new U();
-        //u.rotate(180);
+        u.rotate(180);
         I i = new I();
         i.rotate(90);
         V v = new V();
-        v.rotate(270);
+        v.rotate(180);
         Z z = new Z();
         z.flip();
         F f = new F();
@@ -28,22 +28,25 @@ public class Main{
         p.rotate(90);
         L l = new L();
         l.flip();
-        l.rotate(90);
+        l.rotate(270);
         
-        board.place(x, 1, 2);
-        //board.place(t, 4, 3);
-        //board.place(u, 1, 4);
-        //board.place(i, 2, 5);
-        //board.place(v, 2, 1);
+        board.place(x, 1, 4);
+        //board.place(t, 1, 4);
+        //board.place(u, 1, 0);
+        //board.place(i, 3, 5);
+        //board.place(v, 4, 1);
         //board.place(z, 4, 2);
         //board.place(f, 3, 3);
         //board.place(y, 9, 3);
         //board.place(w, 7, 3);
         //board.place(n, 7, 4);
-        //board.place(p, 1, 0);
-        //board.place(l, 8, 1);
+        //board.place(p, 7, 1);
+        //board.place(l, 8, 0);
         System.out.println("After");
-        System.out.println(board.validate(1, 2, -1, 1));
+        //System.out.println(board.validate(1, 2, -1, 1));
+        board.print_out();
+        board.reflect_both(x, 1, 4);
+        System.out.println("");
         board.print_out();
     }
 }
