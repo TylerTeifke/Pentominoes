@@ -142,7 +142,7 @@ public class Board {
         return 0;
     }
 
-    //Will tell how spaces a space is surrounded by
+    //Will tell how many spaces a space is surrounded by
     private int surrounded(int x_cord, int y_cord){
         int sorrunded_by = top_taken(x_cord, y_cord) +
                            bottom_taken(x_cord, y_cord) +
@@ -172,23 +172,24 @@ public class Board {
         }
         else{
             int surrounded_by = surrounded(x_cord, y_cord);
+            depth -= 1;
             if(surrounded_by >= 2){
                 //Will mark spaces that are surrounded
                 board[y_cord][x_cord] = '1';
                 int[] cords = {x_cord, y_cord};
                 surrounded_squares.add(cords);
                 return 1 + 
-                       track_isolated(x_cord + 1, y_cord, depth--, surrounded_squares) +
-                       track_isolated(x_cord - 1, y_cord, depth--, surrounded_squares) +
-                       track_isolated(x_cord, y_cord + 1, depth--, surrounded_squares) +
-                       track_isolated(x_cord, y_cord - 1, depth--, surrounded_squares);
+                       track_isolated(x_cord + 1, y_cord, depth, surrounded_squares) +
+                       track_isolated(x_cord - 1, y_cord, depth, surrounded_squares) +
+                       track_isolated(x_cord, y_cord + 1, depth, surrounded_squares) +
+                       track_isolated(x_cord, y_cord - 1, depth, surrounded_squares);
             }
             else{
                 return 0 + 
-                    track_isolated(x_cord + 1, y_cord, depth--, surrounded_squares) +
-                    track_isolated(x_cord - 1, y_cord, depth--, surrounded_squares) +
-                    track_isolated(x_cord, y_cord + 1, depth--, surrounded_squares) +
-                    track_isolated(x_cord, y_cord - 1, depth--, surrounded_squares);
+                    track_isolated(x_cord + 1, y_cord, depth, surrounded_squares) +
+                    track_isolated(x_cord - 1, y_cord, depth, surrounded_squares) +
+                    track_isolated(x_cord, y_cord + 1, depth, surrounded_squares) +
+                    track_isolated(x_cord, y_cord - 1, depth, surrounded_squares);
             }
         }
     }
