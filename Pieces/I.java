@@ -37,4 +37,12 @@ public class I extends Pentomino {
             right = 0;
         }
     }
+
+    public int max_degree(){
+        return 90;
+    }
+
+    public boolean can_flip(){
+        return false;
+    }
 }

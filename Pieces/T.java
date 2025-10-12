@@ -38,4 +38,8 @@ public class T extends Pentomino {
                 break;
         }
     }
+
+    public boolean can_flip(){
+        return false;
+    }
 }

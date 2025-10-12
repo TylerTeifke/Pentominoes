@@ -42,6 +42,11 @@ public class Pentomino {
         }
     }
 
+    //Will return the maximum rotation degree
+    public int max_degree(){
+        return 270;
+    }
+
     //Will be used to get the relevant dimensions of a piece
     public int get_top(){
         return top;
@@ -83,6 +88,10 @@ public class Pentomino {
         }
 
         return ret_piece;
+    }
+
+    public boolean can_flip(){
+        return true;
     }
 
     /*

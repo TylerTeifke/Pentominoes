@@ -45,6 +45,10 @@ public class Z extends Pentomino {
         }
     }
 
+    public int max_degree(){
+        return 90;
+    }
+
     public void flip(){
         //Will clear the grid
         super.rotate(0);

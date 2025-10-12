@@ -18,4 +18,12 @@ public class X extends Pentomino {
     @Override public void rotate(int degrees){
         System.out.println("Can't rotate the X piece");
     }
+
+    public int max_degree(){
+        return 0;
+    }
+
+    public boolean can_flip(){
+        return false;
+    }
 }

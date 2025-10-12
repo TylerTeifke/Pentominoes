@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import Pieces.*;
 
 public class Main{
@@ -10,7 +12,7 @@ public class Main{
         t.rotate(270);
         X x = new X();
         U u = new U();
-        u.rotate(90);
+        //u.rotate(90);
         I i = new I();
         i.rotate(90);
         V v = new V();
@@ -35,21 +37,26 @@ public class Main{
         l.flip();
         l.rotate(270);
         //l.print_out();
+
+        ArrayList<Pentomino> pieces = new ArrayList<>();
+        pieces.add(u);
         
         board.place(x, 2, 1);
-        board.place(t, 1, 4);
-        board.place(u, 0, 1);
-        board.place(i, 5, 0);
-        board.place(v, 8, 4);
-        board.place(z, 6, 2);
-        board.place(f, 4, 2);
-        board.place(y, 3, 5);
-        board.place(w, 8, 1);
-        board.place(n, 8, 2);
-        board.place(p, 6, 4);
-        //board.place(l, 3, 3);
-        System.out.println("After");
-        System.out.println(board.validate(4, 4, 0, 0));
         board.print_out();
+        board.solve(pieces);
+        //board.place(t, 1, 4);
+        //board.place(u, 0, 1);
+        //board.place(i, 5, 0);
+        //board.place(v, 8, 4);
+        //board.place(z, 6, 2);
+        //board.place(f, 4, 2);
+        //board.place(y, 3, 5);
+        //board.place(w, 8, 1);
+        //board.place(n, 8, 2);
+        //board.place(p, 6, 4);
+        //board.place(l, 3, 3);
+        //System.out.println("After");
+        //System.out.println(board.validate(4, 4, 0, 0));
+        //board.print_out();
     }
 }

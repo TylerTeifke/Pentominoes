@@ -55,4 +55,8 @@ public class U extends Pentomino {
                 break;
         }
     }
+
+    public boolean can_flip(){
+        return false;
+    }
 }
