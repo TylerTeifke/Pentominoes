@@ -5,8 +5,8 @@ import Pieces.*;
 public class Main{
     public static void main(String[] args) {
         Board board = new Board();
-        System.out.println("Before");
-        board.print_out();
+        //System.out.println("Before");
+        //board.print_out();
 
         T t = new T();
         //t.rotate(270);
@@ -39,19 +39,20 @@ public class Main{
         //l.print_out();
 
         ArrayList<Pentomino> pieces = new ArrayList<>();
-        pieces.add(u);
-        pieces.add(t);
-        pieces.add(i);
-        pieces.add(v);
-        pieces.add(z);
-        pieces.add(f);
-        pieces.add(y);
-        pieces.add(w);
-        pieces.add(n);
-        pieces.add(p);
         pieces.add(l);
+        pieces.add(p);
+        pieces.add(n);
+        pieces.add(w);
+        pieces.add(y);
+        pieces.add(f);
+        pieces.add(z);
+        pieces.add(v);
+        pieces.add(i);
+        pieces.add(t);
+        pieces.add(u);
+        //pieces.add(x);
         
-        board.place(x, 2, 1);
+        board.place(x, 4, 2);
         //board.print_out();
         System.out.println(board.solve(pieces).size());
         //board.place(t, 1, 4);
