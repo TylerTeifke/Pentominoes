@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 import Pieces.*;
 
 public class Main{
@@ -51,7 +50,7 @@ public class Main{
         pieces.add(t);
         pieces.add(u);
         
-        board.place(x, 3, 2);
+        board.place(x, 2, 1);
         //board.print_out();
         System.out.println(board.solve(pieces).size());
         //board.place(t, 1, 4);

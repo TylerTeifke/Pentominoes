@@ -263,11 +263,8 @@ public class Board {
     /*
      * Will use recursion and backtracking to find every solution to the puzzle
      */
-    private void recursively_solve(ArrayList<Pentomino> pieces, ArrayList<char[][]> output, int depth){
+    private void recursively_solve(ArrayList<Pentomino> pieces, ArrayList<char[][]> output){
         //If all pieces have been placed, then add the final board to the list of solved puzzles
-        if(output.size() > 10){
-            return;
-        }
         if(pieces.size() == 0){
             output.add(board);
             print_out();
@@ -275,47 +272,43 @@ public class Board {
             return;
         }
         Pentomino current = pieces.get(0);
-        //pieces.remove(0);
         //Will keep track of whether the current piece has been placed or not
         //boolean has_been_placed = false;
         boolean been_flipped = !current.can_flip();
 
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 10; j++){
-                
-                //Will be used to rotate the current piece
-                int degrees = 0;
+                //Will only check squares that are not occupied
+                //if(board[i][j] == '0'){
+                    //Will be used to rotate the current piece
+                    int degrees = 0;
 
-                while(degrees <= current.max_degree()){
-                    current.rotate(degrees);
+                    while(degrees <= current.max_degree()){
+                        current.rotate(degrees);
 
-                    if(place(current, j, i)){
-                        if(validate_all(j, i)){
-                            //has_been_placed = true;
-                            pieces.remove(0);
-                            recursively_solve(pieces, output, depth--);
-                            pieces.add(0, current);
+                        if(place(current, j, i)){
+                            if(validate_all(j, i)){
+                                pieces.remove(0);
+                                recursively_solve(pieces, output);
+                                pieces.add(0, current);
+                            }
+
+                            remove(current, j, i);
                         }
 
-                        remove(current, j, i);
-                    }
+                        degrees += 90;
 
-                    degrees += 90;
-
-                    //Will flip the current piece to see if it can fit into the board
-                    if(degrees >= current.max_degree() && !been_flipped){
-                        degrees = 0;
-                        current.flip();
-                        been_flipped = true;
+                        //Will flip the current piece to see if it can fit into the board
+                        if(degrees >= current.max_degree() && !been_flipped){
+                            degrees = 0;
+                            current.flip();
+                            been_flipped = true;
+                        }
                     }
-                }
+                //}
+                
             }
         }
-
-        //if(!has_been_placed){
-            //pieces.add(current);
-            //recursively_solve(pieces, output);
-        //}
     }
 
     /*
@@ -324,7 +317,7 @@ public class Board {
     public ArrayList<char[][]> solve(ArrayList<Pentomino> pieces){
         ArrayList<char[][]> output = new ArrayList<>();
 
-        recursively_solve(pieces, output, 90);
+        recursively_solve(pieces, output);
 
         return output;
     }
