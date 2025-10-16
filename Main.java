@@ -50,7 +50,6 @@ public class Main{
         pieces.add(i);
         pieces.add(t);
         pieces.add(u);
-        //pieces.add(x);
         
         board.place(x, 4, 2);
         //board.print_out();
