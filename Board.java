@@ -278,35 +278,31 @@ public class Board {
 
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 10; j++){
-                //Will only check squares that are not occupied
-                //if(board[i][j] == '0'){
-                    //Will be used to rotate the current piece
-                    int degrees = 0;
+                //Will be used to rotate the current piece
+                int degrees = 0;
 
-                    while(degrees <= current.max_degree()){
-                        current.rotate(degrees);
+                while(degrees <= current.max_degree()){
+                    current.rotate(degrees);
 
-                        if(place(current, j, i)){
-                            if(validate_all(j, i)){
-                                pieces.remove(0);
-                                recursively_solve(pieces, output);
-                                pieces.add(0, current);
-                            }
-
-                            remove(current, j, i);
+                    if(place(current, j, i)){
+                        if(validate_all(j, i)){
+                            pieces.remove(0);
+                            recursively_solve(pieces, output);
+                            pieces.add(0, current);
                         }
 
-                        degrees += 90;
-
-                        //Will flip the current piece to see if it can fit into the board
-                        if(degrees >= current.max_degree() && !been_flipped){
-                            degrees = 0;
-                            current.flip();
-                            been_flipped = true;
-                        }
+                        remove(current, j, i);
                     }
-                //}
-                
+
+                    degrees += 90;
+
+                    //Will flip the current piece to see if it can fit into the board
+                    if(degrees >= current.max_degree() && !been_flipped){
+                        degrees = 0;
+                        current.flip();
+                        been_flipped = true;
+                    }
+                }
             }
         }
     }

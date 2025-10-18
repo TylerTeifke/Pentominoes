@@ -39,6 +39,7 @@ public class Main{
 
         ArrayList<Pentomino> pieces = new ArrayList<>();
         pieces.add(l);
+        pieces.add(u);
         pieces.add(p);
         pieces.add(n);
         pieces.add(w);
@@ -48,7 +49,7 @@ public class Main{
         pieces.add(v);
         pieces.add(i);
         pieces.add(t);
-        pieces.add(u);
+        
         
         board.place(x, 2, 1);
         //board.print_out();
